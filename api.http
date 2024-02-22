@@ -1,0 +1,45 @@
+# test
+GET http://localhost:3000/test
+
+###
+
+# post student
+POST http://localhost:3000/students
+Content-Type: application/json
+
+{
+  "id": "1",
+  "name": "John Doe",
+  "age": 20,
+  "address": "123 Main St",
+  "grade": "A"
+}
+
+###
+
+# get student by id
+GET http://localhost:3000/students/asd
+
+###
+
+# get all students
+GET http://localhost:3000/students
+
+### 
+# get all students by observable
+GET http://localhost:3000/students/all/observable
+
+###
+# get env from student module
+GET http://localhost:3000/students/configuration
+
+
+
+###
+# get student from app module
+GET http://localhost:3000/app/students
+
+
+###
+# get env from app module
+GET http://localhost:3000/app/configuration
