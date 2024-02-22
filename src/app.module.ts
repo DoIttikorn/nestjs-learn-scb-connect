@@ -16,9 +16,33 @@ import { APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core';
 import { LoggingInterceptor } from './interceptor/logging.interceptor';
 import { ErrorsInterceptor } from './interceptor/exception.interceptor';
 import { TimeoutInterceptor } from './interceptor/timeout.interceptor';
+import { TeacherModule } from './teacher/teacher.module';
+import { ConfigModule } from '@nestjs/config';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
-  imports: [StudentsModule, ConfigurationModule],
+  imports: [
+    StudentsModule,
+    ConfigurationModule,
+    TeacherModule,
+    ConfigModule.forRoot({
+      envFilePath: '.development.env',
+      isGlobal: true,
+    }),
+    TypeOrmModule.forRoot({
+      type: 'mysql',
+      host: 'localhost',
+      port: 3306,
+      username: 'root',
+      password: '10pineappleAPPLE10',
+      database: 'school',
+      entities: [
+        __dirname + '/**/*.entity{.ts,.js}',
+        __dirname + '/**/*.entity.ts',
+      ],
+      synchronize: true,
+    }),
+  ],
   controllers: [AppController],
   providers: [
     AppService,
